@@ -10,35 +10,38 @@
 <!--
 
 
-
-/*
-
-  multiple terminal test for termlib.js
-
-
-
-  (c) Norbert Landsteiner 2003-2005
-
-  mass:werk - media environments
-
-  <http://www.masswerk.at>
-
-
-
-*/
-
-
 var term;
 
 var helpPage=[
 
 	'%CS%+r Terminal Help %-r%n',
-	'  This is just a tiny test.',
 	'  use one of the following commands:',
+	'     aboutme .. more about me',
 	'     clear .... clear the terminal',
 	'     help ..... show this help page',
 	'  other input will be echoed to the terminal.',
 	' '
+];
+
+var antennaTower=[
+'%CS%+r About Me %-r%n',
+'     --=---+---=--',
+'            \\___',
+'      ---=---+-I-=---           Name:      Karsten',
+'             |\\                 HAM Radio: DG0ONH',
+'       ---=----+----=---        QTH:       JO51KF',
+'             |                  Interests:',
+'             |                  + Software Defined Radio,',
+'         ,--..Y                 + all things RF related,',
+'         \\   /`.                + Electrical Engineering',
+'           \\.    \\              + Embedded Computing',
+'            """--\'',
+'           |  /|',
+'           | / |',
+'           +---+',
+'           |  /|                k.aback(a)googlemail.com',
+'           | / |',
+'           +---+',
 ];
 
 
@@ -85,6 +88,9 @@ function termHandler() {
 //		}
 		else if (cmd=='help') {
 			this.write(helpPage);
+		}
+		else if (cmd=='aboutme') {
+			this.write(antennaTower);
 		}
 		else {
 			this.type('You typed: '+cmd);
