@@ -63,7 +63,6 @@ function termOpen() {
 		);
 
 		if (term) term.open();
-		morse.playString(ac.currentTime, "DE DG0ONH");
 	}
 	else if (term.closed) {
 		term.open();
@@ -92,8 +91,6 @@ function termHandler() {
 		}
 		else if (cmd=='aboutme') {
 			this.write(antennaTower);
-		}
-		else if (cmd=='morse') {
 			morse.playString(ac.currentTime, "DE DG0ONH");
 		}
 		else {
