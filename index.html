@@ -11,12 +11,14 @@
 
 
 var term;
+var url = "http://api.thingspeak.com/channels/185689/feed/last.json";
 
 var helpPage=[
 
 	'%CS%+r Terminal Help %-r%n',
 	'  use one of the following commands:',
 	'     aboutme .. more about me',
+	'     wind ..... give windspeed',
 	'     clear .... clear the terminal',
 	'     help ..... show this help page',
 	'  other input will be echoed to the terminal.',
@@ -93,6 +95,21 @@ function termHandler() {
 			this.write(antennaTower);
 			morse.playString(ac.currentTime, "DE DG0ONH");
 		}
+		else if (cmd=='wind') {
+			fetch(url).then(function(response) {  
+    				return response.text();  
+  			})  
+  			.then(function(text) {  
+    				obj = JSON.parse(text);
+				morse.playString(ac.currentTime, obj.field1);
+				term.type('Windspeed Waidberg: ' + obj.field1 + 'm/s');
+				term.prompt();
+  			})  
+  			.catch(function(error) {  
+				morse.playString(ac.currentTime, "ERROR");
+  			});
+			//morse.playString(ac.currentTime, "DE DG0ONH");
+		}
 		else {
 			this.type('You typed: '+cmd);
 			this.newLine();
@@ -155,6 +172,7 @@ MorseNode.prototype.MORSE = {
     "X": "-..-",
     "Y": "-.--",
     "Z": "--..",
+    ".": ".-.-.-",
  
     "1": ".----",
     "2": "..---",
