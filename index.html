@@ -11,8 +11,13 @@
 
 
 var term;
-var url = "http://api.thingspeak.com/channels/185689/feed/last.json";
-
+var url = "api.thingspeak.com/channels/185689/feed/last.json";
+if (location.protocol != 'https:')
+{
+	url = 'http://' + url;
+} else {
+	url = 'https://' + url;
+}
 var helpPage=[
 
 	'%CS%+r Terminal Help %-r%n',
