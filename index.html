@@ -12,7 +12,7 @@
 
 var term;
 var url = "api.thingspeak.com/channels/185689/feed/last.json";
-if (location.protocol != 'https:')
+if (document.location.protocol != 'https:')
 {
 	url = 'http://' + url;
 } else {
