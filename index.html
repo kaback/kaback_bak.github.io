@@ -105,6 +105,8 @@ function termHandler() {
 		}
 		else if (cmd=='wind') {
 
+			term.type('Waidberg: ');
+			term.prompt();
 			morsestring = "";
 
 			fetch(speedurl).then(function(response) {  
@@ -115,8 +117,6 @@ function termHandler() {
 				morsestring += "S ";
 				//morse.playString(ac.currentTime, obj.field1);
 				morsestring += obj.field1;
-				term.type('Waidberg: ');
-				term.prompt();
 				term.type(' Windspeed    : ' + obj.field1 + 'm/s');
 				term.prompt();
   			})  
