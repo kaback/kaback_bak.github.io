@@ -111,10 +111,10 @@ function termHandler() {
     				obj = JSON.parse(text);
 				morsestring += "S ";
 				//morse.playString(ac.currentTime, obj.field1);
-				morsestring += obj.field1;
+				morsestring += (parseFloat(obj.field1)).toFixed(2).toString();
 				term.type('Waidberg: ');
 				term.prompt();
-				term.type(' Speed    : ' + obj.field1 + 'm/s');
+				term.type(' Speed    : ' + (parseFloat(obj.field1)).toFixed(2) + ' m/s');
 				term.prompt();
   			})
 			.then(function() {
@@ -129,7 +129,7 @@ function termHandler() {
 				//morse.playString(ac.currentTime, (parseFloat(obj.field1)).toFixed(2).toString());
 				morsestring +=  (parseFloat(obj.field1)).toFixed(2).toString();
 				morse.playString(ac.currentTime, morsestring);
-				term.type(' Direction: ' + (parseFloat(obj.field1)).toFixed(2) + 'deg');
+				term.type(' Direction: ' + (parseFloat(obj.field1)).toFixed(2) + ' deg');
 				term.prompt();
   			})  
   			.catch(function(error) {  
