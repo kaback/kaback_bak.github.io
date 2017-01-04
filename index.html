@@ -93,9 +93,6 @@ function termHandler() {
 		if (cmd=='clear') {
 			this.clear();
 		}
-//		else if (cmd=='exit') {
-//			this.close();
-//		}
 		else if (cmd=='help') {
 			this.write(helpPage);
 		}
@@ -105,8 +102,6 @@ function termHandler() {
 		}
 		else if (cmd=='wind') {
 
-			term.type('Waidberg: ');
-			term.prompt();
 			morsestring = "";
 
 			fetch(speedurl).then(function(response) {  
@@ -117,31 +112,29 @@ function termHandler() {
 				morsestring += "S ";
 				//morse.playString(ac.currentTime, obj.field1);
 				morsestring += obj.field1;
-				term.type(' Windspeed    : ' + obj.field1 + 'm/s');
+				term.type('Waidberg: ');
 				term.prompt();
-  			})  
-  			.catch(function(error) {  
-				morse.playString(ac.currentTime, "ERROR");
-  			});
-			//morse.playString(ac.currentTime, "DE DG0ONH");
-		//}
-		//else if (cmd=='windd') {
-			fetch(dirurl).then(function(response) {  
-    				return response.text();  
-  			})  
+				term.type(' Speed    : ' + obj.field1 + 'm/s');
+				term.prompt();
+  			})
+			.then(function() {
+				return fetch(dirurl);
+			})
+			.then(function(response) {  
+                                return response.text();
+			})
   			.then(function(text) {  
     				obj = JSON.parse(text);
 				morsestring += " D ";
 				//morse.playString(ac.currentTime, (parseFloat(obj.field1)).toFixed(2).toString());
 				morsestring +=  (parseFloat(obj.field1)).toFixed(2).toString();
 				morse.playString(ac.currentTime, morsestring);
-				term.type(' Winddirection: ' + (parseFloat(obj.field1)).toFixed(2) + 'deg');
+				term.type(' Direction: ' + (parseFloat(obj.field1)).toFixed(2) + 'deg');
 				term.prompt();
   			})  
   			.catch(function(error) {  
 				morse.playString(ac.currentTime, "ERROR");
   			});
-			//morse.playString(ac.currentTime, "DE DG0ONH");
 		}
 		else {
 			this.type('You typed: '+cmd);
